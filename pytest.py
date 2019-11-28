@@ -1,21 +1,33 @@
 import sys
-from PyQt5.QtCore import Qt
-from PyQt5.QtGui import QPainter
-from PyQt5.QtWidgets import QApplication, QWidget
+from PyQt5.QtWidgets import QApplication, QWidget, QLabel
+from PyQt5.QtGui import QIcon, QPixmap
 
-class MainWindow(QWidget):
-    def __init__(self, parent=None):
-        super(MainWindow, self).__init__(parent)
-        self.setWindowTitle("This is a pyqt sample")
-        self.setGeometry(0, 0, 300, 200)
+class App(QWidget):
 
-    def paintEvent(self, event):
-        p = QPainter(self)
-        p.setPen(Qt.yellow)
-        p.setBrush(Qt.yellow)
-        p.drawRect(10, 10, 20, 50)
+    def __init__(self):
+        super().__init__()
+        self.title = 'PyQt5 image - pythonspot.com'
+        self.left = 10
+        self.top = 10
+        self.width = 640
+        self.height = 480
+        self.initUI()
+    
+    def initUI(self):
+        self.setWindowTitle(self.title)
+        self.setGeometry(self.left, self.top, self.width, self.height)
+    
+        # Create widget
+        label = QLabel(self)
+        pixmap = QPixmap('waifu.png')
+        label.setPixmap(pixmap)
+        #画面いっぱいに画像を割当
+        self.resize(pixmap.width(),pixmap.height())
+        
+        #画面の表示
+        self.show()
 
-app = QApplication(sys.argv)
-mainWindow = MainWindow()
-mainWindow.show()
-sys.exit(app.exec_())
+if __name__ == '__main__':
+    app = QApplication(sys.argv)
+    ex = App()
+    sys.exit(app.exec_())
