@@ -18,15 +18,16 @@ def main():
     # コンテキストを作成
     glfw.make_context_current(window)
 
-    # バージョンを指定
+    # バージョンを指定(OpenGLのバージョンを固定するため)
     glfw.window_hint(glfw.CONTEXT_VERSION_MAJOR, 4)
     glfw.window_hint(glfw.CONTEXT_VERSION_MINOR, 0)
     glfw.window_hint(glfw.OPENGL_PROFILE, glfw.OPENGL_CORE_PROFILE)
 
+    #このwhileが描画を行うメインループ
     while not glfw.window_should_close(window):
-        # バッファを指定色で初期化
-        glClearColor(1, 0, 0, 1)
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
+        # バッファを指定色で初期化(背景は赤)
+        glClearColor(1, 0, 0, 1)    #フロントバッファ
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)  #バックバッファ
 
         # バッファを入れ替えて画面を更新
         glfw.swap_buffers(window)
